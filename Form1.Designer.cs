@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.TBIdProcess = new System.Windows.Forms.TextBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -43,7 +43,7 @@
             this.TBCurrentPriority = new System.Windows.Forms.TextBox();
             this.TBTime = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBasePriority = new System.Windows.Forms.ComboBox();
+            this.TBBasePriority = new System.Windows.Forms.TextBox();
             this.labelBasePriority = new System.Windows.Forms.Label();
             this.labelTimeUsed = new System.Windows.Forms.Label();
             this.labelCurrentPriority = new System.Windows.Forms.Label();
@@ -55,8 +55,6 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.labelMainTimer = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.labelMemory = new System.Windows.Forms.Label();
-            this.textBoxMemory = new System.Windows.Forms.TextBox();
             this.TBRAM0 = new System.Windows.Forms.TextBox();
             this.TBRAM1 = new System.Windows.Forms.TextBox();
             this.TBRAM2 = new System.Windows.Forms.TextBox();
@@ -93,6 +91,8 @@
             this.labelVirtual = new System.Windows.Forms.Label();
             this.groupRAM = new System.Windows.Forms.GroupBox();
             this.groupVirtualMemory = new System.Windows.Forms.GroupBox();
+            this.btn_RandomProcess = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
@@ -107,7 +107,7 @@
             this.listBox1.Location = new System.Drawing.Point(331, 7);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(1392, 996);
+            this.listBox1.Size = new System.Drawing.Size(2000, 996);
             this.listBox1.TabIndex = 0;
             // 
             // TBIdProcess
@@ -121,23 +121,25 @@
             // 
             // chart1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
-            this.chart1.Location = new System.Drawing.Point(611, 475);
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(1334, 468);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
+            this.chart1.MaximumSize = new System.Drawing.Size(500, 500);
             this.chart1.Name = "chart1";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chart1.Series.Add(series5);
-            this.chart1.Size = new System.Drawing.Size(443, 466);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(500, 411);
             this.chart1.TabIndex = 10;
             this.chart1.Text = "chart1";
-            title5.Name = "titleTime";
-            title5.Text = "Время использования каждого процесса";
-            this.chart1.Titles.Add(title5);
+            title1.Name = "titleTime";
+            title1.Text = "Время использования каждого процесса";
+            this.chart1.Titles.Add(title1);
             // 
             // TBNameProcess
             // 
@@ -167,9 +169,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.textBoxMemory);
-            this.panel1.Controls.Add(this.labelMemory);
-            this.panel1.Controls.Add(this.comboBasePriority);
+            this.panel1.Controls.Add(this.TBBasePriority);
             this.panel1.Controls.Add(this.labelBasePriority);
             this.panel1.Controls.Add(this.labelTimeUsed);
             this.panel1.Controls.Add(this.labelCurrentPriority);
@@ -182,24 +182,16 @@
             this.panel1.Location = new System.Drawing.Point(16, 7);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(309, 264);
+            this.panel1.Size = new System.Drawing.Size(309, 228);
             this.panel1.TabIndex = 14;
             // 
-            // comboBasePriority
+            // TBBasePriority
             // 
-            this.comboBasePriority.FormattingEnabled = true;
-            this.comboBasePriority.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.comboBasePriority.Location = new System.Drawing.Point(173, 151);
-            this.comboBasePriority.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBasePriority.Name = "comboBasePriority";
-            this.comboBasePriority.Size = new System.Drawing.Size(121, 24);
-            this.comboBasePriority.TabIndex = 22;
+            this.TBBasePriority.Location = new System.Drawing.Point(171, 154);
+            this.TBBasePriority.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TBBasePriority.Name = "TBBasePriority";
+            this.TBBasePriority.Size = new System.Drawing.Size(119, 22);
+            this.TBBasePriority.TabIndex = 23;
             // 
             // labelBasePriority
             // 
@@ -298,49 +290,34 @@
             // labelMainTimer
             // 
             this.labelMainTimer.AutoSize = true;
-            this.labelMainTimer.Location = new System.Drawing.Point(16, 505);
+            this.labelMainTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelMainTimer.Location = new System.Drawing.Point(125, 524);
             this.labelMainTimer.Name = "labelMainTimer";
-            this.labelMainTimer.Size = new System.Drawing.Size(16, 17);
+            this.labelMainTimer.Size = new System.Drawing.Size(26, 29);
             this.labelMainTimer.TabIndex = 19;
             this.labelMainTimer.Text = "0";
             // 
             // chart2
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart2.Legends.Add(legend6);
-            this.chart2.Location = new System.Drawing.Point(1062, 477);
+            this.chart2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(1334, 56);
             this.chart2.Margin = new System.Windows.Forms.Padding(4);
+            this.chart2.MaximumSize = new System.Drawing.Size(500, 500);
             this.chart2.Name = "chart2";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chart2.Series.Add(series6);
-            this.chart2.Size = new System.Drawing.Size(443, 466);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(500, 410);
             this.chart2.TabIndex = 20;
             this.chart2.Text = "chart2";
-            title6.Name = "titlePriority";
-            title6.Text = "Приоритезация процессов";
-            this.chart2.Titles.Add(title6);
-            // 
-            // labelMemory
-            // 
-            this.labelMemory.AutoSize = true;
-            this.labelMemory.Location = new System.Drawing.Point(39, 227);
-            this.labelMemory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelMemory.Name = "labelMemory";
-            this.labelMemory.Size = new System.Drawing.Size(123, 17);
-            this.labelMemory.TabIndex = 23;
-            this.labelMemory.Text = "Память процесса";
-            // 
-            // textBoxMemory
-            // 
-            this.textBoxMemory.Location = new System.Drawing.Point(173, 222);
-            this.textBoxMemory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxMemory.Name = "textBoxMemory";
-            this.textBoxMemory.Size = new System.Drawing.Size(119, 22);
-            this.textBoxMemory.TabIndex = 24;
+            title2.Name = "titlePriority";
+            title2.Text = "Приоритезация процессов";
+            this.chart2.Titles.Add(title2);
             // 
             // TBRAM0
             // 
@@ -348,7 +325,6 @@
             this.TBRAM0.Name = "TBRAM0";
             this.TBRAM0.Size = new System.Drawing.Size(100, 22);
             this.TBRAM0.TabIndex = 25;
-            this.TBRAM0.Text = "lol";
             // 
             // TBRAM1
             // 
@@ -571,7 +547,7 @@
             // 
             this.labelRAM.AutoSize = true;
             this.labelRAM.BackColor = System.Drawing.Color.White;
-            this.labelRAM.Location = new System.Drawing.Point(354, 213);
+            this.labelRAM.Location = new System.Drawing.Point(342, 677);
             this.labelRAM.Name = "labelRAM";
             this.labelRAM.Size = new System.Drawing.Size(38, 17);
             this.labelRAM.TabIndex = 57;
@@ -581,7 +557,7 @@
             // 
             this.labelVirtual.AutoSize = true;
             this.labelVirtual.BackColor = System.Drawing.Color.White;
-            this.labelVirtual.Location = new System.Drawing.Point(869, 213);
+            this.labelVirtual.Location = new System.Drawing.Point(839, 686);
             this.labelVirtual.Name = "labelVirtual";
             this.labelVirtual.Size = new System.Drawing.Size(102, 17);
             this.labelVirtual.TabIndex = 58;
@@ -589,6 +565,7 @@
             // 
             // groupRAM
             // 
+            this.groupRAM.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupRAM.Controls.Add(this.TBRAM15);
             this.groupRAM.Controls.Add(this.TBRAM14);
             this.groupRAM.Controls.Add(this.TBRAM13);
@@ -605,7 +582,7 @@
             this.groupRAM.Controls.Add(this.TBRAM2);
             this.groupRAM.Controls.Add(this.TBRAM1);
             this.groupRAM.Controls.Add(this.TBRAM0);
-            this.groupRAM.Location = new System.Drawing.Point(357, 238);
+            this.groupRAM.Location = new System.Drawing.Point(345, 697);
             this.groupRAM.Name = "groupRAM";
             this.groupRAM.Size = new System.Drawing.Size(441, 137);
             this.groupRAM.TabIndex = 59;
@@ -613,6 +590,7 @@
             // 
             // groupVirtualMemory
             // 
+            this.groupVirtualMemory.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL15);
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL14);
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL13);
@@ -629,18 +607,42 @@
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL2);
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL1);
             this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL0);
-            this.groupVirtualMemory.Location = new System.Drawing.Point(864, 238);
+            this.groupVirtualMemory.Location = new System.Drawing.Point(842, 706);
             this.groupVirtualMemory.Name = "groupVirtualMemory";
             this.groupVirtualMemory.Size = new System.Drawing.Size(437, 128);
             this.groupVirtualMemory.TabIndex = 60;
             this.groupVirtualMemory.TabStop = false;
+            // 
+            // btn_RandomProcess
+            // 
+            this.btn_RandomProcess.Location = new System.Drawing.Point(16, 243);
+            this.btn_RandomProcess.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_RandomProcess.Name = "btn_RandomProcess";
+            this.btn_RandomProcess.Size = new System.Drawing.Size(308, 46);
+            this.btn_RandomProcess.TabIndex = 61;
+            this.btn_RandomProcess.Text = "Случайный процесс";
+            this.btn_RandomProcess.UseVisualStyleBackColor = true;
+            this.btn_RandomProcess.Click += new System.EventHandler(this.btn_RandomProcess_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label1.Location = new System.Drawing.Point(12, 524);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 29);
+            this.label1.TabIndex = 62;
+            this.label1.Text = "Прошло";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1763, 560);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(1835, 876);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btn_RandomProcess);
             this.Controls.Add(this.groupVirtualMemory);
             this.Controls.Add(this.groupRAM);
             this.Controls.Add(this.labelVirtual);
@@ -658,6 +660,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -690,10 +693,7 @@
         private System.Windows.Forms.Button buttonGo;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Label labelMainTimer;
-        private System.Windows.Forms.ComboBox comboBasePriority;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.TextBox textBoxMemory;
-        private System.Windows.Forms.Label labelMemory;
         private System.Windows.Forms.TextBox TBRAM0;
         private System.Windows.Forms.TextBox TBRAM1;
         private System.Windows.Forms.TextBox TBRAM2;
@@ -730,5 +730,8 @@
         private System.Windows.Forms.Label labelVirtual;
         private System.Windows.Forms.GroupBox groupRAM;
         private System.Windows.Forms.GroupBox groupVirtualMemory;
+        private System.Windows.Forms.Button btn_RandomProcess;
+        private System.Windows.Forms.TextBox TBBasePriority;
+        private System.Windows.Forms.Label label1;
     }
 }

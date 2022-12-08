@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace List
 {
@@ -7,50 +8,69 @@ namespace List
     {
         int virtualMemorySize;
 
-        public void SwapPage(Process process)
+        public ProcessVirtualMemory(int virtualMemorySize)
         {
-            ProcessManager processManager = new ProcessManager();
-            List<Process> processes= processManager.GetList();
-            Process currentProccess = processes.Find(x => x.name == process.name);
-            if(GetCurrentSizeMemoryVirtual() < virtualMemorySize && currentProccess != null){
-                process.ramAddress = null;
-                process.virtualAddress = process.name;
-            }
-            else
-            {
-                throw new OverflowException();
-            }
+            this.virtualMemorySize = virtualMemorySize;
         }
 
-        public void Init(int sizeVirtualMemory)
+        public void SwapPage(int addr, List<Process> processes,RAM rAM)
         {
-            ProcessManager processManager = new ProcessManager();
-            List<Process> processes = processManager.GetList();
-            this.virtualMemorySize = sizeVirtualMemory;
-            foreach (var process in processes)
+                var activeProcess = processes.Find(x => x.idProcess == addr);
+                    if (rAM.GetCurrentSizeMemoryRar(processes) == virtualMemorySize)
+                    {
+                    var swapProcess = processes.Find(x => x.ramAddress != default);
+                    var tempRam = swapProcess.ramAddress;
+                    var tempVirtual = swapProcess.virtualAddress;
+                    swapProcess.ramAddress = activeProcess.ramAddress;
+                    swapProcess.virtualAddress = activeProcess.virtualAddress;
+                    activeProcess.ramAddress = tempRam;
+                    activeProcess.virtualAddress = tempVirtual;
+                    } else {
+                    var swapProcess = processes.Find(x => x.ramAddress == 0 && x.virtualAddress == 0);
+                        activeProcess.ramAddress = swapProcess.idProcess-1;
+                        activeProcess.virtualAddress = 0;
+                    }
+        }
+
+        public void Init(List<Process> list)
+        {
+            for (int i =0;i<list.Count;i++)
             {
-                if (GetCurrentSizeMemoryVirtual() < virtualMemorySize && process.currentStatus == Process.Status.Waiting || process.currentStatus == Process.Status.Ready)
+                if (GetCurrentSizeMemoryVirtual(list) < virtualMemorySize && list[i].ramAddress==default && list[i].virtualAddress == default)
                 {
-                    process.ramAddress = null;
-                    process.virtualAddress = process.name;
+                    list[i].virtualAddress = list[i].idProcess;
                 }
             }
         }
 
-        private int GetCurrentSizeMemoryVirtual()
+        private int GetCurrentSizeMemoryVirtual(List<Process> list)
         {
-            int currentSizeMemoryVirtual = 0;
-            ProcessManager processManager = new ProcessManager();
-            List<Process> processes = processManager.GetList();
-            foreach (var process in processes)
+            int size = 0;
+            foreach (var process in list)
             {
-                if (process.virtualAddress != null)
+                if (process.virtualAddress != default)
                 {
-                    currentSizeMemoryVirtual+=process.sizeMemory;
+                    size++;
                 }
             }
-            return currentSizeMemoryVirtual;
+            return size;
 
         }
+
+
+        public bool isHasAddr(List<Process> list, int addr)
+        {
+            bool res = false;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].idProcess == addr && list[i].virtualAddress!=default)
+                {
+                    res = true;
+                    return res;
+                }
+            }
+            return res;
+        }
+
     }
 }

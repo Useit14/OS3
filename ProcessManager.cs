@@ -11,13 +11,22 @@ namespace List
     internal class ProcessManager
     {
         List<Process> list = new List<Process>();
-        RAM rAM= new RAM(16);
+        static RAM rAM;
+        static ProcessVirtualMemory virtualMemory;
         Process activeProcess;
          int currentTicks;
 
         public ProcessManager()
         {
             currentTicks = 0;
+            
+        }
+
+        public void CreateRAMArray()
+        {
+            rAM = new RAM(16);
+            virtualMemory = new ProcessVirtualMemory(16);
+            rAM.CreateRAMArray(list, virtualMemory);
         }
 
         public void Draw(Series series,int flag)
@@ -143,7 +152,8 @@ namespace List
             {
                 if(process.currentStatus == Status.Zombie)
                 {
-                    RemoveByIndex(process.idProcess);
+                    process.ramAddress = 0;
+                    process.virtualAddress = 0;
                 }
             }
         }
@@ -163,33 +173,65 @@ namespace List
 
         public void nextTime(Label label, GroupBox groupRAM, GroupBox groupVirtualMemory)
         {
-                activeProcess = Scheduler.getNextActive(list);
-                if (activeProcess == null)
+            verifyForReady();
+            verifyForTerminated();
+           activeProcess = Scheduler.getNextActive(list);
+           if (activeProcess == null)
                 {
+                    for (int i = 0; i < groupRAM.Controls.Count; i++)
+                    {
+                        groupRAM.Controls[i].BackColor = System.Drawing.Color.White;
+                        groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
+                    }
                     return;
                 }
+
+            if (rAM.isHasAddr(list,activeProcess.idProcess))
+            {
                 activeProcess.Go();
-                currentTicks++;
-            rAM.CreateRAMArray(list);
-            for (int i = list.Count - 1; i >= 0; i--)
+            } else if(virtualMemory.isHasAddr(list,activeProcess.idProcess))
+            {
+                virtualMemory.SwapPage(activeProcess.idProcess,list,rAM);
+                activeProcess.Go();
+            }
+
+            for(int i = 0; i < groupRAM.Controls.Count; i++)
             {
                 groupRAM.Controls[i].BackColor = System.Drawing.Color.White;
                 groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
             }
-            for (int i = list.Count - 1; i >= 0; i--)
+
+            for(int i = 0; i < list.Count; i++)
             {
-                if (list[i].ramAddress != null)
+                var item = list[i];
+                if (item.ramAddress != default)
                 {
-                    groupRAM.Controls[i].BackColor = System.Drawing.Color.Red;
+                    
+                        var control = groupRAM.Controls[(item.ramAddress-1)%16];
+
+                        if (control.BackColor == System.Drawing.Color.White)
+                        {
+                            if (item.currentStatus == Status.Active)
+                            {
+                                control.BackColor = System.Drawing.Color.Green;
+                            }
+                            else
+                            {
+                                control.BackColor = System.Drawing.Color.LightBlue;
+                            }
+                        }
+                            
+                } else if (item.virtualAddress != default) {
+                 
+                        var control = groupVirtualMemory.Controls[(item.virtualAddress - 1) % 16];
+                        if (control.BackColor == System.Drawing.Color.White)
+                        {
+                            control.BackColor = System.Drawing.Color.LightBlue;
+                        }
                 }
             }
-            for (int i = list.Count - 1; i >= 0; i--)
-            {
-                if (list[i].virtualAddress != null)
-                {
-                    groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.Red;
-                }
-            }
+
+            currentTicks++;
             label.Text = currentTicks.ToString();
         }
     }

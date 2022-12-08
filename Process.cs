@@ -23,12 +23,11 @@ namespace List
         public int basePriority;
         public int currentPriority;
         public Status currentStatus;
-        public int sizeMemory;
-        public string ramAddress;
-        public string virtualAddress;
+        public int ramAddress;
+        public int virtualAddress;
 
 
-        public Process(int idProcess, string name, int timeResorce, int sizeMemory, int basePriority=0 )
+        public Process(int idProcess, string name, int timeResorce , int basePriority=0 )
         {
             this.idProcess = idProcess;
             this.basePriority = basePriority;
@@ -36,7 +35,6 @@ namespace List
             this.name = name;
             this.currentStatus = Status.Ready;
             this.timeResource = timeResorce;
-            this.sizeMemory = sizeMemory;
         }
 
         public void Go () {

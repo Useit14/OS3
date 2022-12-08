@@ -59,7 +59,7 @@ namespace List
             listBox1.Items.Clear();
             foreach(var process in processes)
             {
-                listBox1.Items.Add($"Идентификатор: {process.idProcess}; Имя: { process.name}; Время использования: {process.timeUsed}; Ресурсное время: {process.timeResource}; Базовый приоритет: {process.basePriority}; Текущий приоритет: {process.currentPriority} ; Статус: {process.currentStatus}, Память: {process.sizeMemory}") ;
+                listBox1.Items.Add($"Идентификатор: {process.idProcess}; Ram: {process.ramAddress}; Virtual: {process.virtualAddress}; Имя: { process.name}; Время использования: {process.timeUsed}; Ресурсное время: {process.timeResource}; Базовый приоритет: {process.basePriority}; Текущий приоритет: {process.currentPriority} ; Статус: {process.currentStatus} ") ;
             }
             processManager.Draw(chart1.Series["Series1"],0);
             processManager.Draw(chart2.Series["Series1"],1);
@@ -69,10 +69,10 @@ namespace List
         {
             try
             {
-                processManager.processAdd(new Process(processManager.getLastId() + 1, TBNameProcess.Text, int.Parse(TBTime.Text), int.Parse(textBoxMemory.Text), int.Parse(comboBasePriority.SelectedItem.ToString())));
+                processManager.processAdd(new Process(processManager.getLastId() + 1, TBNameProcess.Text, int.Parse(TBTime.Text), int.Parse(TBBasePriority.Text)));
                 ToList(listBox1, chart1,chart2);
                 TBNameProcess.Text = "";
-                comboBasePriority.SelectedItem = null;
+                TBBasePriority.Text= "";
                 TBTime.Text = "";
             }
             catch 
@@ -87,17 +87,18 @@ namespace List
             processManager.processRemove(idProcess);
             ToList(listBox1, chart1, chart2);
             TBNameProcess.Text = "";
-            comboBasePriority.SelectedItem=null;
+            TBBasePriority.Text="";
             TBTime.Text = "";
         }
         private void buttonGo_Click(object sender, EventArgs e)
         {
             obj = new Obj(labelMainTimer, listBox1, chart1,chart2,groupRAM,groupVirtualMemory);
-            timer = new Timer(tm, obj, 0, 1000);
             Process activeProcess = Scheduler.getNextActive(processManager.GetList());
             TBNameProcess.Text = activeProcess.name;
-            comboBasePriority.SelectedText = activeProcess.currentPriority.ToString();
+            TBCurrentPriority.Text = activeProcess.currentPriority.ToString();
             TBTime.Text = activeProcess.timeUsed.ToString();
+            processManager.CreateRAMArray();
+            timer = new Timer(tm, obj, 0, 1000);
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -122,5 +123,21 @@ namespace List
             
         }
 
+        private void btn_RandomProcess_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Random random = new Random();
+                processManager.processAdd(new Process(processManager.getLastId() + 1, TBNameProcess.Text + random.Next(), random.Next(3,5), random.Next(3,5)));
+                ToList(listBox1, chart1, chart2);
+                TBNameProcess.Text = "";
+                TBCurrentPriority.Text = "";
+                TBTime.Text = "";
+            }
+            catch
+            {
+                MessageBox.Show("Создайте процессы");
+            };
+        }
     }
 }

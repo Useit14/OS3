@@ -26,7 +26,7 @@ namespace List
                         {
                             item.currentPriority = item.basePriority;
                         }
-                        else if(item.currentStatus!=Process.Status.Zombie)
+                        else
                         {
                             item.currentPriority++;
                         }
