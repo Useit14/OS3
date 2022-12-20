@@ -35,6 +35,8 @@ namespace List
             this.name = name;
             this.currentStatus = Status.Ready;
             this.timeResource = timeResorce;
+            this.ramAddress = -1;
+            this.virtualAddress = -1;
         }
 
         public void Go () {

@@ -57,6 +57,7 @@
     <Compile Include="Node.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="ProcessManager.cs" />
+    <Compile Include="ProcessMemories.cs" />
     <Compile Include="ProcessVirtualMemory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

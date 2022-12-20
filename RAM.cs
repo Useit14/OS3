@@ -9,48 +9,60 @@ namespace List
 {
     class RAM
     {
+        List<Process> ramProcesses;
+        List<Process> virtualProcesses;
+
         int sizeMemoryRar;
         public RAM(int sizeMemoryRar)
         {
             this.sizeMemoryRar =sizeMemoryRar;
+            ramProcesses = new List<Process>();
+            virtualProcesses = new List<Process>();
+
+
         }
 
         public void CreateRAMArray(List<Process> list, ProcessVirtualMemory processVirtualMemory)
         {
+            ramProcesses.Clear();
+            virtualProcesses.Clear();
+            bool isRam = true;
             for(int i=0;i<list.Count;i++)
             {
-                if (GetCurrentSizeMemoryRar(list) < sizeMemoryRar && list[i].ramAddress == default && list[i].virtualAddress == default)
+                if (ramProcesses.Count == sizeMemoryRar)
                 {
-                    list[i].ramAddress = list[i].idProcess;
+                    isRam = false;
                 }
-                else if(GetCurrentSizeMemoryRar(list) >= sizeMemoryRar)
+                if (isRam == true)
                 {
-                    processVirtualMemory.Init(list);
-                    break;
+                    ramProcesses.Add(list[i]);
+                } else
+                {
+                    virtualProcesses.Add(list[i]);
                 }
             }
+            processVirtualMemory.Init(virtualProcesses);
         }
 
-        public int GetCurrentSizeMemoryRar(List<Process> list)
+        public int GetCurrentSizeMemoryRar(List<Process> processes)
         {
             int size = 0;
-            foreach(var process in list)
+            foreach(var process in processes)
             {
-                if (process.ramAddress != default)
+                if (process.ramAddress!=-1 && process.currentStatus!=Process.Status.Zombie)
                 {
                     size++;
                 }
             }
             return size;
-
         }
 
-        public bool isHasAddr(List<Process> list,int addr)
+        public bool isHasAddr(int idProcess)
         {
             bool res = false;
-            foreach (var process in list)
+            foreach (var process in ramProcesses)
             {
-                if (process.ramAddress != default && process.idProcess==addr)
+                if (process.idProcess == idProcess)
                 {
                     res = true;
                     return res;
@@ -59,16 +71,20 @@ namespace List
             return res;
         }
 
-        public void SetDefault(List<Process> list, int addr)
+        public void Add(Process process)
         {
-            foreach (var process in list)
-            {
-                if (process.idProcess == addr)
-                {
-                    process.ramAddress = default;
-
-                }
-            }
+            ramProcesses.Add(process);
         }
+
+        public void Remove(Process process)
+        {
+            ramProcesses.Remove(process);
+        }
+
+        public List<Process> GetProcesses()
+        {
+            return ramProcesses;
+        }
+
     }
 }

@@ -6,49 +6,49 @@ namespace List
 {
     class ProcessVirtualMemory
     {
+        List<Process> virtualProcesses;
+
         int virtualMemorySize;
 
         public ProcessVirtualMemory(int virtualMemorySize)
         {
             this.virtualMemorySize = virtualMemorySize;
+            virtualProcesses = new List<Process>();
         }
 
-        public void SwapPage(int addr, List<Process> processes,RAM rAM)
+        public void SwapPage(RAM rAM)
         {
-                var activeProcess = processes.Find(x => x.idProcess == addr);
-                    if (rAM.GetCurrentSizeMemoryRar(processes) == virtualMemorySize)
-                    {
-                    var swapProcess = processes.Find(x => x.ramAddress != default);
-                    var tempRam = swapProcess.ramAddress;
-                    var tempVirtual = swapProcess.virtualAddress;
-                    swapProcess.ramAddress = activeProcess.ramAddress;
-                    swapProcess.virtualAddress = activeProcess.virtualAddress;
-                    activeProcess.ramAddress = tempRam;
-                    activeProcess.virtualAddress = tempVirtual;
-                    } else {
-                    var swapProcess = processes.Find(x => x.ramAddress == 0 && x.virtualAddress == 0);
-                        activeProcess.ramAddress = swapProcess.idProcess-1;
-                        activeProcess.virtualAddress = 0;
-                    }
-        }
-
-        public void Init(List<Process> list)
-        {
-            for (int i =0;i<list.Count;i++)
+            var ramProcesses = rAM.GetProcesses();
+            var activeProcess = virtualProcesses.Find(x => x.currentStatus == Process.Status.Active);
+            if (ramProcesses.Count == virtualMemorySize)
             {
-                if (GetCurrentSizeMemoryVirtual(list) < virtualMemorySize && list[i].ramAddress==default && list[i].virtualAddress == default)
-                {
-                    list[i].virtualAddress = list[i].idProcess;
-                }
+                var swapProcess = ramProcesses.Find(x => x.currentStatus==Process.Status.Ready);
+                var temp = swapProcess;
+                swapProcess = activeProcess;
+                activeProcess = temp;
+            }
+            else
+            {
+                var swapProcess = ramProcesses.Find(x => x.currentStatus == Process.Status.Zombie);
+                ramProcesses.Remove(swapProcess);
+                ramProcesses.Add(activeProcess);
+                virtualProcesses.Remove(activeProcess);
             }
         }
 
-        private int GetCurrentSizeMemoryVirtual(List<Process> list)
+        public void Init(List<Process> virtualProcesses)
+        {
+            this.virtualProcesses.Clear();
+            this.virtualProcesses.AddRange(virtualProcesses);
+            
+        }
+
+        private int GetCurrentSizeMemoryVirtual(List<Process> processes)
         {
             int size = 0;
-            foreach (var process in list)
+            foreach (var process in processes)
             {
-                if (process.virtualAddress != default)
+                if (process.virtualAddress!=-1 && process.currentStatus != Process.Status.Zombie)
                 {
                     size++;
                 }
@@ -58,18 +58,33 @@ namespace List
         }
 
 
-        public bool isHasAddr(List<Process> list, int addr)
+        public bool isHasAddr(int idProcess)
         {
             bool res = false;
-            for (int i = 0; i < list.Count; i++)
+            foreach (var process in virtualProcesses)
             {
-                if (list[i].idProcess == addr && list[i].virtualAddress!=default)
+                if (process.idProcess == idProcess)
                 {
                     res = true;
                     return res;
                 }
             }
             return res;
+        }
+
+        public void Add(Process process)
+        {
+            virtualProcesses.Add(process);
+        }
+
+        public void Remove(Process process)
+        {
+            virtualProcesses.Remove(process);
+        }
+
+        public List <Process> GetProcesses()
+        {
+            return virtualProcesses;
         }
 
     }

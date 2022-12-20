@@ -11,6 +11,8 @@ namespace List
     internal class ProcessManager
     {
         List<Process> list = new List<Process>();
+        List<Process> ramProcesses;
+        List<Process> virtualProcesses;
         static RAM rAM;
         static ProcessVirtualMemory virtualMemory;
         Process activeProcess;
@@ -27,6 +29,8 @@ namespace List
             rAM = new RAM(16);
             virtualMemory = new ProcessVirtualMemory(16);
             rAM.CreateRAMArray(list, virtualMemory);
+            ramProcesses = rAM.GetProcesses();
+            virtualProcesses = virtualMemory.GetProcesses();
         }
 
         public void Draw(Series series,int flag)
@@ -150,10 +154,10 @@ namespace List
         {
             foreach (var process in list)
             {
-                if(process.currentStatus == Status.Zombie)
+                if (process.currentStatus == Status.Zombie)
                 {
-                    process.ramAddress = 0;
-                    process.virtualAddress = 0;
+                    ramProcesses.Remove(process);
+                    virtualProcesses.Remove(process);
                 }
             }
         }
@@ -173,8 +177,7 @@ namespace List
 
         public void nextTime(Label label, GroupBox groupRAM, GroupBox groupVirtualMemory)
         {
-            verifyForReady();
-            verifyForTerminated();
+           verifyForReady();
            activeProcess = Scheduler.getNextActive(list);
            if (activeProcess == null)
                 {
@@ -184,53 +187,79 @@ namespace List
                         groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
                     }
                     return;
-                }
+           }
 
-            if (rAM.isHasAddr(list,activeProcess.idProcess))
-            {
-                activeProcess.Go();
-            } else if(virtualMemory.isHasAddr(list,activeProcess.idProcess))
-            {
-                virtualMemory.SwapPage(activeProcess.idProcess,list,rAM);
-                activeProcess.Go();
-            }
-
-            for(int i = 0; i < groupRAM.Controls.Count; i++)
+            for (int i = 0; i < 16; i++)
             {
                 groupRAM.Controls[i].BackColor = System.Drawing.Color.White;
                 groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
             }
 
-            for(int i = 0; i < list.Count; i++)
+            //rAM.CreateRAMArray(list, virtualMemory);
+            if (virtualMemory.isHasAddr(activeProcess.idProcess))
             {
-                var item = list[i];
-                if (item.ramAddress != default)
-                {
-                    
-                        var control = groupRAM.Controls[(item.ramAddress-1)%16];
+                virtualMemory.SwapPage(rAM);
+            }
+           
 
-                        if (control.BackColor == System.Drawing.Color.White)
-                        {
-                            if (item.currentStatus == Status.Active)
-                            {
-                                control.BackColor = System.Drawing.Color.Green;
-                            }
-                            else
-                            {
-                                control.BackColor = System.Drawing.Color.LightBlue;
-                            }
-                        }
-                            
-                } else if (item.virtualAddress != default) {
-                 
-                        var control = groupVirtualMemory.Controls[(item.virtualAddress - 1) % 16];
-                        if (control.BackColor == System.Drawing.Color.White)
-                        {
-                            control.BackColor = System.Drawing.Color.LightBlue;
-                        }
+            int index = 0;
+            foreach (var process in ramProcesses)
+            {
+                    var control = groupRAM.Controls[index];
+                if (process != null)
+                {
+                    if (process.currentStatus == Status.Active)
+                    {
+                        control.BackColor = System.Drawing.Color.Green;
+                    }
+                    else if (process.currentStatus == Status.Ready)
+                    {
+                        control.BackColor = System.Drawing.Color.LightBlue;
+                    }
                 }
+               
+                index++;
             }
 
+            index = 0;
+            foreach (var process in virtualProcesses)
+            {
+                    var control = groupVirtualMemory.Controls[index];
+                if (process != null)
+                {
+                    if (process.currentStatus == Status.Ready)
+                    {
+                        control.BackColor = System.Drawing.Color.LightBlue;
+                    }
+                }
+                
+                index++;
+            }
+
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    var current = list[i];
+        //    if (current.ramAddress != -1 && current.currentStatus!=Status.Zombie)
+        //    {
+        //        var control = groupRAM.Controls[current.ramAddress];
+        //        if (current.currentStatus == Status.Active)
+        //        {
+        //            control.BackColor = System.Drawing.Color.Green;
+        //        } else if (current.currentStatus == Status.Ready)
+        //        {
+        //            control.BackColor = System.Drawing.Color.LightBlue;
+        //        }
+        //    }
+        //    else if(current.virtualAddress!=-1 && current.currentStatus!=Status.Zombie)
+        //    {
+        //        var control = groupVirtualMemory.Controls[current.virtualAddress];
+        //        if (current.currentStatus == Status.Ready)
+        //        {
+        //            control.BackColor = System.Drawing.Color.LightBlue;
+        //        }
+        //    }
+        //}
+            activeProcess.Go();
             currentTicks++;
             label.Text = currentTicks.ToString();
         }
