@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace List
 {
-    internal class Process
+    internal class Process: IComparable
     {
         public int idProcess;
         public string name;
@@ -41,6 +41,22 @@ namespace List
 
         public void Go () {
             timeUsed++; 
+        }
+
+        public int CompareTo(object obj)
+        {
+            return this.currentPriority.CompareTo((obj as Process).currentPriority);
+        }
+
+        public Process Copy(Process proc)
+        {
+            Process process = new Process(proc.idProcess,proc.name,proc.timeResource);
+            process.currentStatus = proc.currentStatus;
+            process.timeUsed = proc.timeUsed;
+            process.currentPriority = proc.currentPriority;
+            process.basePriority = proc.basePriority;
+
+            return process;
         }
     }
 }

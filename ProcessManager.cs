@@ -11,26 +11,13 @@ namespace List
     internal class ProcessManager
     {
         List<Process> list = new List<Process>();
-        List<Process> ramProcesses;
-        List<Process> virtualProcesses;
-        static RAM rAM;
-        static ProcessVirtualMemory virtualMemory;
         Process activeProcess;
-         int currentTicks;
+        int currentTicks;
 
         public ProcessManager()
         {
             currentTicks = 0;
             
-        }
-
-        public void CreateRAMArray()
-        {
-            rAM = new RAM(16);
-            virtualMemory = new ProcessVirtualMemory(16);
-            rAM.CreateRAMArray(list, virtualMemory);
-            ramProcesses = rAM.GetProcesses();
-            virtualProcesses = virtualMemory.GetProcesses();
         }
 
         public void Draw(Series series,int flag)
@@ -152,14 +139,7 @@ namespace List
         }
         public void verifyForTerminated()
         {
-            foreach (var process in list)
-            {
-                if (process.currentStatus == Status.Zombie)
-                {
-                    ramProcesses.Remove(process);
-                    virtualProcesses.Remove(process);
-                }
-            }
+            list.RemoveAll(x => x.currentStatus == Status.Zombie);
         }
 
         public void verifyForReady()
@@ -177,89 +157,12 @@ namespace List
 
         public void nextTime(Label label, GroupBox groupRAM, GroupBox groupVirtualMemory)
         {
-           verifyForReady();
-           activeProcess = Scheduler.getNextActive(list);
-           if (activeProcess == null)
-                {
-                    for (int i = 0; i < groupRAM.Controls.Count; i++)
-                    {
-                        groupRAM.Controls[i].BackColor = System.Drawing.Color.White;
-                        groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
-                    }
-                    return;
-           }
-
-            for (int i = 0; i < 16; i++)
+           verifyForTerminated();
+            if (list.Count != 0)
             {
-                groupRAM.Controls[i].BackColor = System.Drawing.Color.White;
-                groupVirtualMemory.Controls[i].BackColor = System.Drawing.Color.White;
+                activeProcess = Scheduler.getNextActive(list);
+                activeProcess.Go();
             }
-
-            //rAM.CreateRAMArray(list, virtualMemory);
-            if (virtualMemory.isHasAddr(activeProcess.idProcess))
-            {
-                virtualMemory.SwapPage(rAM);
-            }
-           
-
-            int index = 0;
-            foreach (var process in ramProcesses)
-            {
-                    var control = groupRAM.Controls[index];
-                if (process != null)
-                {
-                    if (process.currentStatus == Status.Active)
-                    {
-                        control.BackColor = System.Drawing.Color.Green;
-                    }
-                    else if (process.currentStatus == Status.Ready)
-                    {
-                        control.BackColor = System.Drawing.Color.LightBlue;
-                    }
-                }
-               
-                index++;
-            }
-
-            index = 0;
-            foreach (var process in virtualProcesses)
-            {
-                    var control = groupVirtualMemory.Controls[index];
-                if (process != null)
-                {
-                    if (process.currentStatus == Status.Ready)
-                    {
-                        control.BackColor = System.Drawing.Color.LightBlue;
-                    }
-                }
-                
-                index++;
-            }
-
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    var current = list[i];
-        //    if (current.ramAddress != -1 && current.currentStatus!=Status.Zombie)
-        //    {
-        //        var control = groupRAM.Controls[current.ramAddress];
-        //        if (current.currentStatus == Status.Active)
-        //        {
-        //            control.BackColor = System.Drawing.Color.Green;
-        //        } else if (current.currentStatus == Status.Ready)
-        //        {
-        //            control.BackColor = System.Drawing.Color.LightBlue;
-        //        }
-        //    }
-        //    else if(current.virtualAddress!=-1 && current.currentStatus!=Status.Zombie)
-        //    {
-        //        var control = groupVirtualMemory.Controls[current.virtualAddress];
-        //        if (current.currentStatus == Status.Ready)
-        //        {
-        //            control.BackColor = System.Drawing.Color.LightBlue;
-        //        }
-        //    }
-        //}
-            activeProcess.Go();
             currentTicks++;
             label.Text = currentTicks.ToString();
         }

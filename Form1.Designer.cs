@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -56,21 +57,26 @@
             this.labelMainTimer = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.TBRAM0 = new System.Windows.Forms.TextBox();
-            this.TBRAM1 = new System.Windows.Forms.TextBox();
-            this.TBRAM2 = new System.Windows.Forms.TextBox();
-            this.TBRAM3 = new System.Windows.Forms.TextBox();
-            this.TBRAM7 = new System.Windows.Forms.TextBox();
-            this.TBRAM6 = new System.Windows.Forms.TextBox();
-            this.TBRAM5 = new System.Windows.Forms.TextBox();
-            this.TBRAM4 = new System.Windows.Forms.TextBox();
-            this.TBRAM11 = new System.Windows.Forms.TextBox();
-            this.TBRAM10 = new System.Windows.Forms.TextBox();
-            this.TBRAM9 = new System.Windows.Forms.TextBox();
-            this.TBRAM8 = new System.Windows.Forms.TextBox();
+            this.TBVIRTUAL0 = new System.Windows.Forms.TextBox();
+            this.labelRAM = new System.Windows.Forms.Label();
+            this.labelVirtual = new System.Windows.Forms.Label();
+            this.groupRAM = new System.Windows.Forms.GroupBox();
             this.TBRAM15 = new System.Windows.Forms.TextBox();
             this.TBRAM14 = new System.Windows.Forms.TextBox();
             this.TBRAM13 = new System.Windows.Forms.TextBox();
             this.TBRAM12 = new System.Windows.Forms.TextBox();
+            this.TBRAM11 = new System.Windows.Forms.TextBox();
+            this.TBRAM10 = new System.Windows.Forms.TextBox();
+            this.TBRAM9 = new System.Windows.Forms.TextBox();
+            this.TBRAM8 = new System.Windows.Forms.TextBox();
+            this.TBRAM7 = new System.Windows.Forms.TextBox();
+            this.TBRAM6 = new System.Windows.Forms.TextBox();
+            this.TBRAM5 = new System.Windows.Forms.TextBox();
+            this.TBRAM4 = new System.Windows.Forms.TextBox();
+            this.TBRAM3 = new System.Windows.Forms.TextBox();
+            this.TBRAM2 = new System.Windows.Forms.TextBox();
+            this.TBRAM1 = new System.Windows.Forms.TextBox();
+            this.groupVirtualMemory = new System.Windows.Forms.GroupBox();
             this.TBVIRTUAL15 = new System.Windows.Forms.TextBox();
             this.TBVIRTUAL14 = new System.Windows.Forms.TextBox();
             this.TBVIRTUAL13 = new System.Windows.Forms.TextBox();
@@ -86,13 +92,9 @@
             this.TBVIRTUAL3 = new System.Windows.Forms.TextBox();
             this.TBVIRTUAL2 = new System.Windows.Forms.TextBox();
             this.TBVIRTUAL1 = new System.Windows.Forms.TextBox();
-            this.TBVIRTUAL0 = new System.Windows.Forms.TextBox();
-            this.labelRAM = new System.Windows.Forms.Label();
-            this.labelVirtual = new System.Windows.Forms.Label();
-            this.groupRAM = new System.Windows.Forms.GroupBox();
-            this.groupVirtualMemory = new System.Windows.Forms.GroupBox();
             this.btn_RandomProcess = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
@@ -326,54 +328,85 @@
             this.TBRAM0.Size = new System.Drawing.Size(100, 22);
             this.TBRAM0.TabIndex = 25;
             // 
-            // TBRAM1
+            // TBVIRTUAL0
             // 
-            this.TBRAM1.Location = new System.Drawing.Point(113, 11);
-            this.TBRAM1.Name = "TBRAM1";
-            this.TBRAM1.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM1.TabIndex = 26;
+            this.TBVIRTUAL0.Location = new System.Drawing.Point(8, 11);
+            this.TBVIRTUAL0.Name = "TBVIRTUAL0";
+            this.TBVIRTUAL0.Size = new System.Drawing.Size(100, 22);
+            this.TBVIRTUAL0.TabIndex = 41;
             // 
-            // TBRAM2
+            // labelRAM
             // 
-            this.TBRAM2.Location = new System.Drawing.Point(219, 11);
-            this.TBRAM2.Name = "TBRAM2";
-            this.TBRAM2.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM2.TabIndex = 27;
+            this.labelRAM.AutoSize = true;
+            this.labelRAM.BackColor = System.Drawing.Color.White;
+            this.labelRAM.Location = new System.Drawing.Point(342, 677);
+            this.labelRAM.Name = "labelRAM";
+            this.labelRAM.Size = new System.Drawing.Size(38, 17);
+            this.labelRAM.TabIndex = 57;
+            this.labelRAM.Text = "RAM";
             // 
-            // TBRAM3
+            // labelVirtual
             // 
-            this.TBRAM3.Location = new System.Drawing.Point(325, 11);
-            this.TBRAM3.Name = "TBRAM3";
-            this.TBRAM3.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM3.TabIndex = 28;
+            this.labelVirtual.AutoSize = true;
+            this.labelVirtual.BackColor = System.Drawing.Color.White;
+            this.labelVirtual.Location = new System.Drawing.Point(839, 686);
+            this.labelVirtual.Name = "labelVirtual";
+            this.labelVirtual.Size = new System.Drawing.Size(102, 17);
+            this.labelVirtual.TabIndex = 58;
+            this.labelVirtual.Text = "Virtual Memory";
             // 
-            // TBRAM7
+            // groupRAM
             // 
-            this.TBRAM7.Location = new System.Drawing.Point(325, 39);
-            this.TBRAM7.Name = "TBRAM7";
-            this.TBRAM7.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM7.TabIndex = 32;
+            this.groupRAM.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupRAM.Controls.Add(this.TBRAM15);
+            this.groupRAM.Controls.Add(this.TBRAM14);
+            this.groupRAM.Controls.Add(this.TBRAM13);
+            this.groupRAM.Controls.Add(this.TBRAM12);
+            this.groupRAM.Controls.Add(this.TBRAM11);
+            this.groupRAM.Controls.Add(this.TBRAM10);
+            this.groupRAM.Controls.Add(this.TBRAM9);
+            this.groupRAM.Controls.Add(this.TBRAM8);
+            this.groupRAM.Controls.Add(this.TBRAM7);
+            this.groupRAM.Controls.Add(this.TBRAM6);
+            this.groupRAM.Controls.Add(this.TBRAM5);
+            this.groupRAM.Controls.Add(this.TBRAM4);
+            this.groupRAM.Controls.Add(this.TBRAM3);
+            this.groupRAM.Controls.Add(this.TBRAM2);
+            this.groupRAM.Controls.Add(this.TBRAM1);
+            this.groupRAM.Controls.Add(this.TBRAM0);
+            this.groupRAM.Location = new System.Drawing.Point(345, 697);
+            this.groupRAM.Name = "groupRAM";
+            this.groupRAM.Size = new System.Drawing.Size(441, 137);
+            this.groupRAM.TabIndex = 59;
+            this.groupRAM.TabStop = false;
             // 
-            // TBRAM6
+            // TBRAM15
             // 
-            this.TBRAM6.Location = new System.Drawing.Point(219, 39);
-            this.TBRAM6.Name = "TBRAM6";
-            this.TBRAM6.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM6.TabIndex = 31;
+            this.TBRAM15.Location = new System.Drawing.Point(325, 95);
+            this.TBRAM15.Name = "TBRAM15";
+            this.TBRAM15.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM15.TabIndex = 40;
             // 
-            // TBRAM5
+            // TBRAM14
             // 
-            this.TBRAM5.Location = new System.Drawing.Point(113, 39);
-            this.TBRAM5.Name = "TBRAM5";
-            this.TBRAM5.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM5.TabIndex = 30;
+            this.TBRAM14.Location = new System.Drawing.Point(219, 95);
+            this.TBRAM14.Name = "TBRAM14";
+            this.TBRAM14.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM14.TabIndex = 39;
             // 
-            // TBRAM4
+            // TBRAM13
             // 
-            this.TBRAM4.Location = new System.Drawing.Point(7, 39);
-            this.TBRAM4.Name = "TBRAM4";
-            this.TBRAM4.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM4.TabIndex = 29;
+            this.TBRAM13.Location = new System.Drawing.Point(113, 95);
+            this.TBRAM13.Name = "TBRAM13";
+            this.TBRAM13.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM13.TabIndex = 38;
+            // 
+            // TBRAM12
+            // 
+            this.TBRAM12.Location = new System.Drawing.Point(7, 95);
+            this.TBRAM12.Name = "TBRAM12";
+            this.TBRAM12.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM12.TabIndex = 37;
             // 
             // TBRAM11
             // 
@@ -403,33 +436,79 @@
             this.TBRAM8.Size = new System.Drawing.Size(100, 22);
             this.TBRAM8.TabIndex = 33;
             // 
-            // TBRAM15
+            // TBRAM7
             // 
-            this.TBRAM15.Location = new System.Drawing.Point(325, 95);
-            this.TBRAM15.Name = "TBRAM15";
-            this.TBRAM15.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM15.TabIndex = 40;
+            this.TBRAM7.Location = new System.Drawing.Point(325, 39);
+            this.TBRAM7.Name = "TBRAM7";
+            this.TBRAM7.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM7.TabIndex = 32;
             // 
-            // TBRAM14
+            // TBRAM6
             // 
-            this.TBRAM14.Location = new System.Drawing.Point(219, 95);
-            this.TBRAM14.Name = "TBRAM14";
-            this.TBRAM14.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM14.TabIndex = 39;
+            this.TBRAM6.Location = new System.Drawing.Point(219, 39);
+            this.TBRAM6.Name = "TBRAM6";
+            this.TBRAM6.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM6.TabIndex = 31;
             // 
-            // TBRAM13
+            // TBRAM5
             // 
-            this.TBRAM13.Location = new System.Drawing.Point(113, 95);
-            this.TBRAM13.Name = "TBRAM13";
-            this.TBRAM13.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM13.TabIndex = 38;
+            this.TBRAM5.Location = new System.Drawing.Point(113, 39);
+            this.TBRAM5.Name = "TBRAM5";
+            this.TBRAM5.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM5.TabIndex = 30;
             // 
-            // TBRAM12
+            // TBRAM4
             // 
-            this.TBRAM12.Location = new System.Drawing.Point(7, 95);
-            this.TBRAM12.Name = "TBRAM12";
-            this.TBRAM12.Size = new System.Drawing.Size(100, 22);
-            this.TBRAM12.TabIndex = 37;
+            this.TBRAM4.Location = new System.Drawing.Point(7, 39);
+            this.TBRAM4.Name = "TBRAM4";
+            this.TBRAM4.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM4.TabIndex = 29;
+            // 
+            // TBRAM3
+            // 
+            this.TBRAM3.Location = new System.Drawing.Point(325, 11);
+            this.TBRAM3.Name = "TBRAM3";
+            this.TBRAM3.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM3.TabIndex = 28;
+            // 
+            // TBRAM2
+            // 
+            this.TBRAM2.Location = new System.Drawing.Point(219, 11);
+            this.TBRAM2.Name = "TBRAM2";
+            this.TBRAM2.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM2.TabIndex = 27;
+            // 
+            // TBRAM1
+            // 
+            this.TBRAM1.Location = new System.Drawing.Point(113, 11);
+            this.TBRAM1.Name = "TBRAM1";
+            this.TBRAM1.Size = new System.Drawing.Size(100, 22);
+            this.TBRAM1.TabIndex = 26;
+            // 
+            // groupVirtualMemory
+            // 
+            this.groupVirtualMemory.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL15);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL14);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL13);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL12);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL11);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL10);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL9);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL8);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL7);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL6);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL5);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL4);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL3);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL2);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL1);
+            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL0);
+            this.groupVirtualMemory.Location = new System.Drawing.Point(842, 706);
+            this.groupVirtualMemory.Name = "groupVirtualMemory";
+            this.groupVirtualMemory.Size = new System.Drawing.Size(437, 128);
+            this.groupVirtualMemory.TabIndex = 60;
+            this.groupVirtualMemory.TabStop = false;
             // 
             // TBVIRTUAL15
             // 
@@ -536,83 +615,6 @@
             this.TBVIRTUAL1.Size = new System.Drawing.Size(100, 22);
             this.TBVIRTUAL1.TabIndex = 42;
             // 
-            // TBVIRTUAL0
-            // 
-            this.TBVIRTUAL0.Location = new System.Drawing.Point(8, 11);
-            this.TBVIRTUAL0.Name = "TBVIRTUAL0";
-            this.TBVIRTUAL0.Size = new System.Drawing.Size(100, 22);
-            this.TBVIRTUAL0.TabIndex = 41;
-            // 
-            // labelRAM
-            // 
-            this.labelRAM.AutoSize = true;
-            this.labelRAM.BackColor = System.Drawing.Color.White;
-            this.labelRAM.Location = new System.Drawing.Point(342, 677);
-            this.labelRAM.Name = "labelRAM";
-            this.labelRAM.Size = new System.Drawing.Size(38, 17);
-            this.labelRAM.TabIndex = 57;
-            this.labelRAM.Text = "RAM";
-            // 
-            // labelVirtual
-            // 
-            this.labelVirtual.AutoSize = true;
-            this.labelVirtual.BackColor = System.Drawing.Color.White;
-            this.labelVirtual.Location = new System.Drawing.Point(839, 686);
-            this.labelVirtual.Name = "labelVirtual";
-            this.labelVirtual.Size = new System.Drawing.Size(102, 17);
-            this.labelVirtual.TabIndex = 58;
-            this.labelVirtual.Text = "Virtual Memory";
-            // 
-            // groupRAM
-            // 
-            this.groupRAM.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.groupRAM.Controls.Add(this.TBRAM15);
-            this.groupRAM.Controls.Add(this.TBRAM14);
-            this.groupRAM.Controls.Add(this.TBRAM13);
-            this.groupRAM.Controls.Add(this.TBRAM12);
-            this.groupRAM.Controls.Add(this.TBRAM11);
-            this.groupRAM.Controls.Add(this.TBRAM10);
-            this.groupRAM.Controls.Add(this.TBRAM9);
-            this.groupRAM.Controls.Add(this.TBRAM8);
-            this.groupRAM.Controls.Add(this.TBRAM7);
-            this.groupRAM.Controls.Add(this.TBRAM6);
-            this.groupRAM.Controls.Add(this.TBRAM5);
-            this.groupRAM.Controls.Add(this.TBRAM4);
-            this.groupRAM.Controls.Add(this.TBRAM3);
-            this.groupRAM.Controls.Add(this.TBRAM2);
-            this.groupRAM.Controls.Add(this.TBRAM1);
-            this.groupRAM.Controls.Add(this.TBRAM0);
-            this.groupRAM.Location = new System.Drawing.Point(345, 697);
-            this.groupRAM.Name = "groupRAM";
-            this.groupRAM.Size = new System.Drawing.Size(441, 137);
-            this.groupRAM.TabIndex = 59;
-            this.groupRAM.TabStop = false;
-            // 
-            // groupVirtualMemory
-            // 
-            this.groupVirtualMemory.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL15);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL14);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL13);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL12);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL11);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL10);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL9);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL8);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL7);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL6);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL5);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL4);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL3);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL2);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL1);
-            this.groupVirtualMemory.Controls.Add(this.TBVIRTUAL0);
-            this.groupVirtualMemory.Location = new System.Drawing.Point(842, 706);
-            this.groupVirtualMemory.Name = "groupVirtualMemory";
-            this.groupVirtualMemory.Size = new System.Drawing.Size(437, 128);
-            this.groupVirtualMemory.TabIndex = 60;
-            this.groupVirtualMemory.TabStop = false;
-            // 
             // btn_RandomProcess
             // 
             this.btn_RandomProcess.Location = new System.Drawing.Point(16, 243);
@@ -633,6 +635,11 @@
             this.label1.Size = new System.Drawing.Size(107, 29);
             this.label1.TabIndex = 62;
             this.label1.Text = "Прошло";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -695,21 +702,29 @@
         private System.Windows.Forms.Label labelMainTimer;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.TextBox TBRAM0;
-        private System.Windows.Forms.TextBox TBRAM1;
-        private System.Windows.Forms.TextBox TBRAM2;
-        private System.Windows.Forms.TextBox TBRAM3;
-        private System.Windows.Forms.TextBox TBRAM7;
-        private System.Windows.Forms.TextBox TBRAM6;
-        private System.Windows.Forms.TextBox TBRAM5;
-        private System.Windows.Forms.TextBox TBRAM4;
-        private System.Windows.Forms.TextBox TBRAM11;
-        private System.Windows.Forms.TextBox TBRAM10;
-        private System.Windows.Forms.TextBox TBRAM9;
-        private System.Windows.Forms.TextBox TBRAM8;
+        private System.Windows.Forms.TextBox TBVIRTUAL0;
+        private System.Windows.Forms.Label labelRAM;
+        private System.Windows.Forms.Label labelVirtual;
+        private System.Windows.Forms.GroupBox groupRAM;
+        private System.Windows.Forms.GroupBox groupVirtualMemory;
+        private System.Windows.Forms.Button btn_RandomProcess;
+        private System.Windows.Forms.TextBox TBBasePriority;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TBRAM15;
         private System.Windows.Forms.TextBox TBRAM14;
         private System.Windows.Forms.TextBox TBRAM13;
         private System.Windows.Forms.TextBox TBRAM12;
+        private System.Windows.Forms.TextBox TBRAM11;
+        private System.Windows.Forms.TextBox TBRAM10;
+        private System.Windows.Forms.TextBox TBRAM9;
+        private System.Windows.Forms.TextBox TBRAM8;
+        private System.Windows.Forms.TextBox TBRAM7;
+        private System.Windows.Forms.TextBox TBRAM6;
+        private System.Windows.Forms.TextBox TBRAM5;
+        private System.Windows.Forms.TextBox TBRAM4;
+        private System.Windows.Forms.TextBox TBRAM3;
+        private System.Windows.Forms.TextBox TBRAM2;
+        private System.Windows.Forms.TextBox TBRAM1;
         private System.Windows.Forms.TextBox TBVIRTUAL15;
         private System.Windows.Forms.TextBox TBVIRTUAL14;
         private System.Windows.Forms.TextBox TBVIRTUAL13;
@@ -725,13 +740,6 @@
         private System.Windows.Forms.TextBox TBVIRTUAL3;
         private System.Windows.Forms.TextBox TBVIRTUAL2;
         private System.Windows.Forms.TextBox TBVIRTUAL1;
-        private System.Windows.Forms.TextBox TBVIRTUAL0;
-        private System.Windows.Forms.Label labelRAM;
-        private System.Windows.Forms.Label labelVirtual;
-        private System.Windows.Forms.GroupBox groupRAM;
-        private System.Windows.Forms.GroupBox groupVirtualMemory;
-        private System.Windows.Forms.Button btn_RandomProcess;
-        private System.Windows.Forms.TextBox TBBasePriority;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
